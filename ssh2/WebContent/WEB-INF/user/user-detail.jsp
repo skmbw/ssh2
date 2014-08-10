@@ -9,9 +9,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户详情</title>
+<script type="text/javascript" src="${ctx}/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css">
 </head>
 <body>
-<table style="border:1px #e8e8e8 solid" border="1" cellspacing="1" cellpadding="1">
+<div class="container">
+<div class="row" style="margin-top:20px;">
+<table class="table table-bordered table-hover table-condensed">
 <tr>
 <td>用户ID</td>
 <td>${model.id}</td>
@@ -33,6 +38,10 @@
 <td>${model.telephone}</td>
 </tr>
 <tr>
+<td>用户手机</td>
+<td>${model.mobilePhone}</td>
+</tr>
+<tr>
 <td>注册时间</td>
 <td><fmt:formatDate value="${model.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 </tr>
@@ -45,6 +54,12 @@
 <td><c:if test="${model.state == 1}">正常</c:if><c:if test="${model.state == 0}">禁用</c:if></td>
 </tr>
 </table>
-<a href="${ctx}/user/initial.htm">返回列表页</a>
+
+</div>
+<div class="row">
+<a class="btn btn-success" href="${ctx}/user/initial.htm">返回列表页</a>
+</div>
+</div>
+
 </body>
 </html>

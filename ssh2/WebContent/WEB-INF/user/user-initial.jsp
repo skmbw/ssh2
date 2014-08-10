@@ -10,17 +10,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>用户列表</title>
 <script type="text/javascript" src="${ctx}/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${ctx}/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${ctx}/bootstrap/js/modal.js"></script>
+<link rel="stylesheet" href="${ctx}/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript">
+
 	function deleteUser(id) {
 		var del = confirm('你确定要删除该用户？');
 		if (del) {
 			$.ajax({
 	            type:"post",
-	            dataType:"json",
+	            dataType:"text",
 	            url: '${ctx}/user/delete.htm?id=' + id,
 	            success: function(msg){
-	                alert("删除成功");
-	                window.location.reload();
+	            	//$('#myModal').modal('show');
+	            	window.location.reload();
 	            },
 	            error: function (msg) {
 	                alert(msg.responseText);
@@ -28,13 +32,20 @@
 	        });
 		}
 	}
+	$(document).ready(function(){
+		$('#add_user').click(function(){
+			window.location.href="${ctx}/user/add.htm";
+		});
+	});
 </script>
 </head>
 <body>
-<table>
-	<tr><td><a href="${ctx}/user/add.htm">新增用户</a></td><td></td><td></td></tr>
-</table>
-<table style="border:1px #e8e8e8 solid" border="1" cellspacing="1" cellpadding="1">
+<div class="container">
+<div class="row" style="margin-top:20px; margin-bottom:20px;">
+	<button type="button" id="add_user" class="btn btn-primary">新增用户</button>
+</div>
+<div class="row">
+<table class="table table-bordered table-hover table-condensed" >
 <tr>
 <td>用户ID</td>
 <td>用户名</td>
@@ -57,5 +68,43 @@
 
 </c:forEach>
 </table>
+</div>
+
+</div>
+
+<div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">温馨提醒您：</h4>
+      </div>
+      <div class="modal-body">
+        	你确定要删除该用户？
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" id="confirmDel" class="btn btn-primary">确认删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">温馨提醒您：</h4>
+      </div>
+      <div class="modal-body">
+        	删除用户成功。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="closeDelModal" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
