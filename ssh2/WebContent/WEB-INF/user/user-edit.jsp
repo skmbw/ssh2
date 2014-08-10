@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +19,7 @@
 <div class="row" style="margin-top:20px;">
 <form class="form-horizontal" role="form" id="editForm" action="${ctx}/user/update.htm" method="post">
 	<input type="hidden" name="id" value="${model.id}">
-<input type="hidden" name="createDate" value="${model.createDate}">
+<input type="hidden" name="createDate" value='<fmt:formatDate value="${model.createDate}" pattern="yyyy-MM-dd HH:mm:ss"/>' >
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
     <div class="col-sm-10">
